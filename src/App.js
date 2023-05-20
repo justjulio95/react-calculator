@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Wrapper from './components/Wrapper';
 import Screen from './components/Screen';
 import ButtonBox from './components/ButtonBox';
@@ -6,15 +6,26 @@ import Button from './components/Button';
 import './App.css';
 
 function App() {
+  // create an array of button values
+  const btnValues = [
+    ['C', '+/-', '%', '/'],
+    ['7', '8', '9', '*'],
+    ['4', '5', '6', '-'],
+    ['1', '2', '3', '+'],
+    ['0', '.', '=']
+  ]
+
   return (
     <Wrapper>
       <Screen value="0"/>
       <ButtonBox>
-        <Button
-          className=''
-          value='0'
-          onClick={() => {console.log('I got clicked!!')}}
-        ></Button>
+        {btnValues.flat().map((btn, i) => (
+          <Button key={i}
+            className={btn === '=' ? 'equals' : ''}
+            value={btn}
+            onClick={() => {console.log(`${btn} clicked`)}}
+          />
+        ))}
       </ButtonBox>
     </Wrapper>
   );
